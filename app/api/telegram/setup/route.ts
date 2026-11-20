@@ -27,8 +27,8 @@ style="padding:12px;width:100%;max-width:350px">
 export async function POST(req: Request) {
   try {
     const form = await req.formData();
-    const entered = String(form.get("secret") || "");
-    const secret = process.env.TELEGRAM_WEBHOOK_SECRET;
+    const entered = String(form.get("secret") || "").trim();
+    const secret = (process.env.TELEGRAM_WEBHOOK_SECRET || "").trim();
     const token = process.env.TELEGRAM_BOT_TOKEN;
 
     if (!secret || entered !== secret) {
@@ -75,3 +75,4 @@ export async function POST(req: Request) {
     });
   }
 }
+
